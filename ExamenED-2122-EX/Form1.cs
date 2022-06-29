@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using gsmconv;
+using AMG22;
 
 namespace ExamenED_2122_EX
 {
@@ -19,15 +19,15 @@ namespace ExamenED_2122_EX
 
         private void btCalcular_Click(object sender, EventArgs e)
         {
-            coord myCoords = new coord(double.Parse(txtLatitud.Text), double.Parse(txtLongitud.Text));
+            Coordenadas myCoords = new Coordenadas(double.Parse(txtLatitud.Text), double.Parse(txtLongitud.Text));
 
-            txtGradosLong.Text = myCoords.lon.G.ToString();
-            txtMinutosLong.Text = myCoords.lon.M.ToString();
-            txtSegundosLong.Text = myCoords.lon.S.ToString("0.00");
+            txtGradosLong.Text = myCoords.longitud.cGrados.ToString();
+            txtMinutosLong.Text = myCoords.longitud.cMinutos.ToString();
+            txtSegundosLong.Text = myCoords.longitud.cSegundos.ToString("0.00");
 
-            txtGradosLat.Text = myCoords.lat.G.ToString();
-            txtMinutosLat.Text = myCoords.lat.M.ToString();
-            txtSegundosLat.Text = myCoords.lat.S.ToString("0.00");
+            txtGradosLat.Text = myCoords.latitud.cGrados.ToString();
+            txtMinutosLat.Text = myCoords.latitud.cMinutos.ToString();
+            txtSegundosLat.Text = myCoords.latitud.cSegundos.ToString("0.00");
         }
     }
 }

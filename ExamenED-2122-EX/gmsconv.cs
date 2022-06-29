@@ -1,72 +1,83 @@
 ﻿using System;
 
-namespace gsmconv
+namespace AMG22
 {
-    public class gms
+    /// <summary>
+    /// Clase CoordenadasGMS
+    /// Se declaran las variables: Grados, Minutos y Segundos
+    /// <para>GMS = Grados, Minutos y Segundos </para>
+    /// </summary>
+    public class CoordenadasGMS
     {
-        private int g; // grados
-        private int m; // minutos
-        private double s; // segundos
-        private int maxg;  // valor límite para los grados
-
-        public gms(int max)
+        private int gradosAMG22; // grados
+        private int minutos; // minutos
+        private double segundos; // segundos
+        private int maximosGrados;  // valor límite para los grados
+        /// <summary>
+        /// se inicializa el constructos a "0"
+        /// </summary>
+        /// <param name="max"></param>
+        public CoordenadasGMS(int max)
         {
-            G = M = 0;
-            S = 0.0;
-            this.maxg = max;
+            cGrados = cMinutos = 0;
+            cSegundos = 0.0;
+            this.maximosGrados = max;
         }
 
-        public int G
+        public int cGrados
         {
-            get => g;
+            get => gradosAMG22;
             set
             {
-                if (value >= -maxg && value <= maxg) g = value;
+                if (value >= -maximosGrados && value <= maximosGrados) gradosAMG22 = value;
                 else throw new ArgumentOutOfRangeException("Grados no válidos");
             }
         }
-        public int M
+        public int cMinutos
         {
-            get => m;
+            get => minutos;
             set
             {
-                if (value >= 0 && value <= 60) m = value;
+                if (value >= 0 && value <= 60) minutos = value;
                 else throw new ArgumentOutOfRangeException("Minutos no válidos");
             }
         }
-        public double S
+        public double cSegundos
         {
-            get => s;
+            get => segundos;
             set
             {
-                if (value >= 0 && value <= 60) s = value;
+                if (value >= 0 && value <= 60) segundos = value;
                 else throw new ArgumentOutOfRangeException("Segundos no válidos");
             }
         }
     }
-
-    public class coord
+    /// <summary>
+    /// Clase coordenadas
+    /// <remarks>Importante tener en cuenta no superar los limites 180 o -180 </remarks>
+    /// </summary>
+    public class Coordenadas
     {
-        public gms lon = new gms(180); // longitud
-        public gms lat = new gms(90); // latitud
+        public CoordenadasGMS longitud = new CoordenadasGMS(180); // longitud
+        public CoordenadasGMS latitud = new CoordenadasGMS(90); // latitud
 
-        public coord(double glong, double glat)
+        public Coordenadas(double gradosLongitud, double gradosLatitud)
         {
             // primero pasamos la longitud de grados a GMS
-            lon.G = (int)glong;
+            longitud.cGrados = (int)gradosLongitud;
             // ahora calculamos los minutos, hay que eliminar el signo
-            glong = Math.Abs((glong - lon.G)*60.0);
-            lon.M = (int)(glong);
+            gradosLongitud = Math.Abs((gradosLongitud - longitud.cGrados) * 60.0);
+            longitud.cMinutos = (int)(gradosLongitud);
             // por último los segundos
-            lon.S = (glong - lon.M)*60.0;
- 
+            longitud.cSegundos = (gradosLongitud - longitud.cMinutos) * 60.0;
+
             // Ahora hacemos lo mismo con la latitud
-            lat.G = (int)glat;
+            latitud.cGrados = (int)gradosLatitud;
             // ahora calculamos los minutos, hay que eliminar el signo
-            glat = Math.Abs((glat - lat.G)*60.0);
-            lat.M = (int)(glat);
+            gradosLatitud = Math.Abs((gradosLatitud - latitud.cGrados) * 60.0);
+            latitud.cMinutos = (int)(gradosLatitud);
             // por último los segundos
-            lat.S = (glat - lat.M)*60.0;
+            latitud.cSegundos = (gradosLatitud - latitud.cMinutos) * 60.0;
         }
     }
 }
