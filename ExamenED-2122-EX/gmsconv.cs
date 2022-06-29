@@ -2,71 +2,76 @@
 
 namespace gsmconv
 {
+    /// <summary>
+    /// Clase que le damos grados minutos y segundos para luego ser convertidos en Coordenadas
+    /// </summary>
     public class gms
     {
-        private int g; // grados
-        private int m; // minutos
-        private double s; // segundos
-        private int maxg;  // valor límite para los grados
-
+        private int grados;
+        private int minutos;
+        private double segundos;
+        private int maxGrados;
         public gms(int max)
         {
-            G = M = 0;
-            S = 0.0;
-            this.maxg = max;
+            Grados = Minutos = 0;
+            Segundos = 0.0;
+            this.maxGrados = max;
         }
 
-        public int G
+        public int Grados
         {
-            get => g;
+            get => grados;
             set
             {
-                if (value >= -maxg && value <= maxg) g = value;
+                if (value >= -maxGrados && value <= maxGrados) grados = value;
                 else throw new ArgumentOutOfRangeException("Grados no válidos");
             }
         }
-        public int M
+        public int Minutos
         {
-            get => m;
+            get => minutos;
             set
             {
-                if (value >= 0 && value <= 60) m = value;
+                if (value >= 0 && value <= 60) minutos = value;
                 else throw new ArgumentOutOfRangeException("Minutos no válidos");
             }
         }
-        public double S
+        public double Segundos
         {
-            get => s;
+            get => segundos;
             set
             {
-                if (value >= 0 && value <= 60) s = value;
+                if (value >= 0 && value <= 60) segundos = value;
                 else throw new ArgumentOutOfRangeException("Segundos no válidos");
             }
         }
     }
 
+    /// <summary>
+    /// Clase dedicada para convertir los datos obtenidos de la clas gms en coordenadas
+    /// </summary>
     public class coord
     {
-        public gms lon = new gms(180); // longitud
-        public gms lat = new gms(90); // latitud
+        public gms longitud = new gms(180);
+        public gms latitud = new gms(90);
 
-        public coord(double glong, double glat)
+        public coord(double gLong, double gLat)
         {
             // primero pasamos la longitud de grados a GMS
-            lon.G = (int)glong;
+            longitud.Grados = (int)gLong;
             // ahora calculamos los minutos, hay que eliminar el signo
-            glong = Math.Abs((glong - lon.G)*60.0);
-            lon.M = (int)(glong);
+            gLong = Math.Abs((gLong - longitud.Grados) * 60.0);
+            longitud.Minutos = (int)(gLong);
             // por último los segundos
-            lon.S = (glong - lon.M)*60.0;
- 
+            longitud.Segundos = (gLong - longitud.Minutos) * 60.0;
+
             // Ahora hacemos lo mismo con la latitud
-            lat.G = (int)glat;
+            latitud.Grados = (int)gLat;
             // ahora calculamos los minutos, hay que eliminar el signo
-            glat = Math.Abs((glat - lat.G)*60.0);
-            lat.M = (int)(glat);
+            gLat = Math.Abs((gLat - latitud.Grados) * 60.0);
+            latitud.Minutos = (int)(gLat);
             // por último los segundos
-            lat.S = (glat - lat.M)*60.0;
+            latitud.Segundos = (gLat - latitud.Minutos) * 60.0;
         }
     }
 }
