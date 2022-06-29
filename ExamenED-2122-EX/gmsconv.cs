@@ -2,71 +2,103 @@
 
 namespace gsmconv
 {
+    //YAG2122
+    /// <summary>
+    /// Esta clase de gradosMintuosSegundos
+    /// </summary>
     public class gms
     {
-        private int g; // grados
-        private int m; // minutos
-        private double s; // segundos
-        private int maxg;  // valor límite para los grados
+        private int grados; // grados
+        private int minutos; // minutos
+        private double segundos; // segundos
+        private int maximoGrado;  // valor límite para los grados
 
+        /// <summary>
+        /// Esto es el constructor
+        /// </summary>
+        /// <param name="max">Esto es un parametro para saber el maximos</param>
         public gms(int max)
         {
-            G = M = 0;
-            S = 0.0;
-            this.maxg = max;
+            Grados = Minutos = 0;
+            Segundos = 0.0;
+            this.maximoGrado = max;
         }
-
-        public int G
+        /// <summary>
+        /// Esto te hace es validar si los grados son validos o no y si estan en el limite
+        /// <exception cref="ArgumentOutOfRangeException">El grado no es validos</exception>
+        /// </summary>
+        public int Grados
         {
-            get => g;
+            get => grados;
             set
             {
-                if (value >= -maxg && value <= maxg) g = value;
+                if (value >= -maximoGrado && value <= maximoGrado) grados = value;
                 else throw new ArgumentOutOfRangeException("Grados no válidos");
             }
         }
-        public int M
+        /// <summary>
+        /// Esto lo uqe hace es validar si los minutos estan bien o se pasa del limite
+        /// <exception cref="ArgumentOutOfRangeException">El grado no es validos</exception>
+        /// </summary>
+        public int Minutos
         {
-            get => m;
+            get => minutos;
             set
             {
-                if (value >= 0 && value <= 60) m = value;
+                if (value >= 0 && value <= 60) minutos = value;
                 else throw new ArgumentOutOfRangeException("Minutos no válidos");
             }
         }
-        public double S
+        /// <summary>
+        /// Esto lo que hace es si lo segundos son valdos y no se pasan de los minutos
+        /// <exception cref="ArgumentOutOfRangeException">El grado no es validos</exception>
+        /// </summary>
+        public double Segundos
         {
-            get => s;
+            get => segundos;
             set
             {
-                if (value >= 0 && value <= 60) s = value;
+                if (value >= 0 && value <= 60) segundos = value;
                 else throw new ArgumentOutOfRangeException("Segundos no válidos");
             }
         }
     }
 
-    public class coord
+    //YAG2122
+    /// <summary>
+    /// Esto es una clase de cordenadas
+    /// </summary>
+    public class Cordenaadas
     {
-        public gms lon = new gms(180); // longitud
-        public gms lat = new gms(90); // latitud
+        /// <summary>
+        /// Esto son variables que vienen de otra clase
+        /// /// </summary>
+        public gms longitud = new gms(180); // longitud
+        public gms latitud = new gms(90); // latitud
 
-        public coord(double glong, double glat)
+      
+        /// <summary>
+        /// Esto es un Construcotr 
+        /// </summary>
+        /// <param name="gradosLongitud">Este es el parametro de longitud</param>
+        /// <param name="gradosLatitud">Este es el parametro de latitud</param>
+        public Cordenaadas(double gradosLongitud, double gradosLatitud)
         {
             // primero pasamos la longitud de grados a GMS
-            lon.G = (int)glong;
+            longitud.Grados = (int)gradosLongitud;
             // ahora calculamos los minutos, hay que eliminar el signo
-            glong = Math.Abs((glong - lon.G)*60.0);
-            lon.M = (int)(glong);
+            gradosLongitud = Math.Abs((gradosLongitud - longitud.Grados)*60.0);
+            longitud.Minutos =(int)(gradosLongitud);
             // por último los segundos
-            lon.S = (glong - lon.M)*60.0;
- 
+            longitud.Segundos = (gradosLongitud - longitud.Minutos)*60.0;
+
             // Ahora hacemos lo mismo con la latitud
-            lat.G = (int)glat;
+            latitud.Grados = (int)gradosLatitud;
             // ahora calculamos los minutos, hay que eliminar el signo
-            glat = Math.Abs((glat - lat.G)*60.0);
-            lat.M = (int)(glat);
+            gradosLatitud = Math.Abs((gradosLatitud - latitud.Grados)*60.0);
+            latitud.Minutos = (int)(gradosLatitud);
             // por último los segundos
-            lat.S = (glat - lat.M)*60.0;
+            latitud.Segundos = (gradosLatitud - latitud.Minutos)*60.0;
         }
     }
 }
