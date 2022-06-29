@@ -1,72 +1,121 @@
 ﻿using System;
 
-namespace gsmconv
+namespace DMP2122Examen
 {
-    public class gms
+    /// <summary>
+    /// Clase que convierte coordenadas en grados, minutos y segundos
+    /// </summary>
+    /// <remarks>Saltan tres excepciones: cuando los valores de
+    /// los grados no son correctos<see cref=">ExcepcionGrados"/> cuando los valores de los minutos no
+    /// son correctos<see cref=">ExcepcionMinutos"/> y cuando los valores de los segundos no
+    /// son correctos<see cref=">ExcepcionSegundos"/></remarks>
+    public class GradosMinutosSegundos
     {
-        private int g; // grados
-        private int m; // minutos
-        private double s; // segundos
-        private int maxg;  // valor límite para los grados
+        public const string ExcepcionGrados = "Grados no válidos";
+        public const string ExcepcionMinutos = "Minutos no válidos";
+        public const string ExcepcionSegundos = "Segundos no válidos";
 
-        public gms(int max)
+        private int grados; // grados
+        private int minutos; // minutos
+        private double segundos; // segundos
+        private int maximoGrado;  // valor límite para los grados
+
+        /// <summary>
+        /// Inicializamos las variables
+        /// </summary>
+        /// <param name="maximo">variable que establece el máximo de los valores</param>
+        public GradosMinutosSegundos(int maximo)
         {
-            G = M = 0;
-            S = 0.0;
-            this.maxg = max;
+            Grados = Minutos = 0;
+            Segundos = 0.0;
+            this.maximoGrado = maximo;
         }
 
-        public int G
+        /// <summary>
+        /// Getters y setters de cada variable
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Salta la excepción cuando los valores de los
+        /// grados no son correctos</exception>
+        public int Grados
         {
-            get => g;
+            get => grados;
             set
             {
-                if (value >= -maxg && value <= maxg) g = value;
-                else throw new ArgumentOutOfRangeException("Grados no válidos");
+                if (value >= -maximoGrado && value <= maximoGrado) grados = value;
+                else throw new ArgumentOutOfRangeException(ExcepcionGrados);
             }
         }
-        public int M
+        public int Minutos
         {
-            get => m;
+            get => minutos;
             set
             {
-                if (value >= 0 && value <= 60) m = value;
-                else throw new ArgumentOutOfRangeException("Minutos no válidos");
+                if (value >= 0 && value <= 60) minutos = value;
+                else throw new ArgumentOutOfRangeException(ExcepcionMinutos);
             }
         }
-        public double S
+        public double Segundos
         {
-            get => s;
+            get => segundos;
             set
             {
-                if (value >= 0 && value <= 60) s = value;
-                else throw new ArgumentOutOfRangeException("Segundos no válidos");
+                if (value >= 0 && value <= 60) segundos = value;
+                else throw new ArgumentOutOfRangeException(ExcepcionSegundos);
             }
         }
     }
 
-    public class coord
+    /// <summary>
+    /// clase que calcula los grados, minutos y segundos
+    /// <para>a raiz de la longitud y la latidud introducidas</para>
+    /// </summary>
+    public class Coordenadas
     {
-        public gms lon = new gms(180); // longitud
-        public gms lat = new gms(90); // latitud
+        /// <summary>
+        /// se crean los objetos longitud y latitud de la clase<see cref=">GradosMinutosSegundos"/>
+        /// </summary>
+        public GradosMinutosSegundos longitud = new GradosMinutosSegundos(180); // longitud
+        public GradosMinutosSegundos latitud = new GradosMinutosSegundos(90); // latitud
 
-        public coord(double glong, double glat)
+        /// <summary>
+        /// método que calcula los grados, minutos y segundos
+        /// <para>nos devuelve los grados minutos y segundos de la longitud</para>
+        /// <para>nos devuleve los grados minutos y segundos de la latitud</para>
+        /// </summary>
+        /// <param name="glongitud">se introduce la longitud</param>
+        /// <param name="glatitud">se introduce la latitud</param>
+        public Coordenadas(double glongitud, double glatitud)
+        {   
+            glongitud = CalcularLongitud(glongitud);    
+            glatitud = CalcularLatitud(glatitud);
+        }
+
+        /// <summary>
+        /// Método que calcula los grados, minutos y segundos a partir de la latitud introducida
+        /// </summary>
+        /// <param name="glatitud">latitud introducida</param>
+        /// <returns>nos devuelve los grados, minutos y segundos de dicha latitud</returns>
+        private double CalcularLatitud(double glatitud)
         {
-            // primero pasamos la longitud de grados a GMS
-            lon.G = (int)glong;
-            // ahora calculamos los minutos, hay que eliminar el signo
-            glong = Math.Abs((glong - lon.G)*60.0);
-            lon.M = (int)(glong);
-            // por último los segundos
-            lon.S = (glong - lon.M)*60.0;
- 
-            // Ahora hacemos lo mismo con la latitud
-            lat.G = (int)glat;
-            // ahora calculamos los minutos, hay que eliminar el signo
-            glat = Math.Abs((glat - lat.G)*60.0);
-            lat.M = (int)(glat);
-            // por último los segundos
-            lat.S = (glat - lat.M)*60.0;
+            latitud.Grados = (int)glatitud;
+            glatitud = Math.Abs((glatitud - latitud.Grados) * 60.0);
+            latitud.Minutos = (int)(glatitud);
+            latitud.Segundos = (glatitud - latitud.Minutos) * 60.0;
+            return glatitud;
+        }
+
+        /// <summary>
+        /// Método que calcula los grados, minutos y segundos a partir de la longtitud introducida
+        /// </summary>
+        /// <param name="glongitud">longitud introducida</param>
+        /// <returns>nos devuelve los grados, minutos y segundos de dicha  longitud</returns>
+        private double CalcularLongitud(double glongitud)
+        {
+            longitud.Grados = (int)glongitud;
+            glongitud = Math.Abs((glongitud - longitud.Grados) * 60.0);
+            longitud.Minutos = (int)(glongitud);
+            longitud.Segundos = (glongitud - longitud.Minutos) * 60.0;
+            return glongitud;
         }
     }
 }
