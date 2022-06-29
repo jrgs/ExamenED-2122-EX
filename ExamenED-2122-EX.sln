@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1401
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamenED-2122-EX", "ExamenED-2122-EX\ExamenED-2122-EX.csproj", "{9A860F01-E043-489E-9886-CCB28F83A56D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCoordenadas", "TestCoordenadas\TestCoordenadas.csproj", "{EF5B0604-7877-4278-8AF9-8F94243B0635}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9A860F01-E043-489E-9886-CCB28F83A56D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A860F01-E043-489E-9886-CCB28F83A56D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A860F01-E043-489E-9886-CCB28F83A56D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF5B0604-7877-4278-8AF9-8F94243B0635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF5B0604-7877-4278-8AF9-8F94243B0635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF5B0604-7877-4278-8AF9-8F94243B0635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF5B0604-7877-4278-8AF9-8F94243B0635}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
