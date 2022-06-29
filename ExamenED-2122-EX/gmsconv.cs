@@ -49,8 +49,10 @@ namespace gsmconv
     {
         public gms longitud = new gms(180); 
         public gms latitud = new gms(90); 
+ 
+      
 
-        public CalcularCoordenadas(double gLongitud, double gLatitud)
+        public double CalcularCoordenadas(double gLongitud, double gLatitud)
         {
             // primero pasamos la longitud de grados a GMS
             longitud.Grados = (int)gLongitud;
@@ -67,6 +69,8 @@ namespace gsmconv
             latitud.Minutos = (int)(gLatitud);
             // por último los segundos
             latitud.Segundos = (gLatitud - latitud.Minutos)*60.0;
+
         }
+    
     }
 }

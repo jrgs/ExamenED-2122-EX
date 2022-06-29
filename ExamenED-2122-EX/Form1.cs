@@ -19,7 +19,7 @@ namespace ExamenED_2122_EX
 
         private void btCalcular_Click(object sender, EventArgs e)
         {
-            coord myCoords = new coord(double.Parse(txtLatitud.Text), double.Parse(txtLongitud.Text));
+            coordenada myCoords = new coordenada(double.Parse(txtLatitud.Text), double.Parse(txtLongitud.Text));
 
             txtGradosLong.Text = myCoords.longitud.Grados.ToString();
             txtMinutosLong.Text = myCoords.longitud.Minutos.ToString();
