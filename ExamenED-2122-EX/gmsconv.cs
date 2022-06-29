@@ -45,17 +45,17 @@ namespace gsmconv
         }
     }
 
-    public class coord
+    public class coordenada
     {
         public gms longitud = new gms(180); 
         public gms latitud = new gms(90); 
 
-        public coord(double gLongitud, double gLatituditud)
+        public CalcularCoordenadas(double gLongitud, double gLatitud)
         {
             // primero pasamos la longitud de grados a GMS
             longitud.Grados = (int)gLongitud;
             // ahora calculamos los minutos, hay que eliminar el signo
-            gLongitud = Math.Abs((gLongitud - lon.G)*60.0);
+            gLongitud = Math.Abs((gLongitud - longitud.Grados)*60.0);
             longitud.Minutos = (int)(gLongitud);
             // por último los segundos
             longitud.Segundos = (gLongitud - longitud.Minutos)*60.0;
