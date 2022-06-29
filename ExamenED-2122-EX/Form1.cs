@@ -19,15 +19,15 @@ namespace ExamenED_2122_EX
 
         private void btCalcular_Click(object sender, EventArgs e)
         {
-            coord myCoords = new coord(double.Parse(txtLatitud.Text), double.Parse(txtLongitud.Text));
+            Coordenada myCoords = new Coordenada(double.Parse(txtLongitud.Text), double.Parse(txtLatitud.Text));
 
-            txtGradosLong.Text = myCoords.lon.G.ToString();
-            txtMinutosLong.Text = myCoords.lon.M.ToString();
-            txtSegundosLong.Text = myCoords.lon.S.ToString("0.00");
+            txtGradosLong.Text = myCoords.longitud.Grados.ToString();
+            txtMinutosLong.Text = myCoords.longitud.Minutos.ToString();
+            txtSegundosLong.Text = myCoords.longitud.Segundos.ToString("0.00");
 
-            txtGradosLat.Text = myCoords.lat.G.ToString();
-            txtMinutosLat.Text = myCoords.lat.M.ToString();
-            txtSegundosLat.Text = myCoords.lat.S.ToString("0.00");
+            txtGradosLat.Text = myCoords.latitud.Grados.ToString();
+            txtMinutosLat.Text = myCoords.latitud.Minutos.ToString();
+            txtSegundosLat.Text = myCoords.latitud.Segundos.ToString("0.00");
         }
     }
 }
