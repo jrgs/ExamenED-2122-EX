@@ -47,9 +47,12 @@ namespace gsmconv
 
     public class coordenada
     {
-        public gms longitud = new gms(180); 
-        public gms latitud = new gms(90); 
- 
+
+        public coordenada(gms longitud, gms latitud)
+        {
+            public gms longitud = new gms(180); 
+            public gms latitud = new gms(90); 
+        }
       
 
         public double CalcularCoordenadas(double gLongitud, double gLatitud)
@@ -73,4 +76,5 @@ namespace gsmconv
         }
     
     }
+
 }
